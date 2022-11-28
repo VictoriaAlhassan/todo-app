@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 body {
+    /* background-color: #444242; */
     font-family: Helvetica, Arial, sans-serif;
   }
   
@@ -8,6 +9,7 @@ body {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
+    
   }
   
   .btn {
@@ -33,7 +35,7 @@ body {
   
   .btn-primary {
     color: #fff;
-    background-color:green;
+    background-color: #444242;
     width: 100%;
     padding: 0.75rem;
     font-size: 1.3rem;
@@ -42,14 +44,14 @@ body {
   }
   
   .btn-primary:hover {
-    background-color: #444242;
+    /* background-color: green; */
   }
   
   .btn-primary:focus {
     color: #000;
     outline: none;
     border: #000 solid 2px;
-    background-color: #d7ecff;
+    /* background-color: #d7ecff; */
   }
   
   .btn-primary:active {
