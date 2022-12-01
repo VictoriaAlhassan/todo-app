@@ -2,6 +2,7 @@
   <!-- <app-item></app-item> -->
   <h1>My To Do List</h1>
   <label for="addItemInput">What would you like to do today?</label>
+   
 
 
   <input
@@ -12,7 +13,13 @@ class="lg-text-input"
 id="addItemInput" />
 
 <button class="btn-primary" (click)="addItem(newItem.value)">Add</button>
-
+ <!-- <button class="btn-todos" (click)="getTodos()" >Fetch todos</button> -->
+ <!-- <nav aria-label="Page navigation example"> -->
+  <!-- <ul class="pagination"> -->
+    <!-- <li  *ngFor="let item of dataset"><button style="width:100x;height:40px;" class="btn-primary" (click)="getUserData(item,10)">{{item}}</button></li> -->
+    <!-- <li class="page-item" *ngFor="let item of dataset"><a (click)="getTodos(item,16)" class="page-link">{{item}}</a></li> -->
+  <!-- </ul> -->
+<!-- </nav> -->
   
   <div class="btn-wrapper">
     <button class="btn btn-menu" [class.active]="filter== 'all'"
@@ -34,3 +41,11 @@ id="addItemInput" />
     </li>
   </ul>
 </div>
+
+<!-- <ul class="list-group"> -->
+  <!-- <li class="list-group-item" *ngFor="let item of allItems| paginate: { itemsPerPage: 20, currentPage: page }"> -->
+        <!-- {{allItems}} -->
+  <!-- </li> -->
+<!--  -->
+<!-- </ul> -->
+<!-- <pagination-controls (pageChange)="page = $event"><pagination-controls> -->
