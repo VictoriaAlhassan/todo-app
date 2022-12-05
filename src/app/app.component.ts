@@ -37,8 +37,8 @@ export class AppComponent{
   title = 'todo';
   POSTS: any;
   page:number = 1;
-  count:number = 0;
-  tableSize:number = 10;
+  count:number = 200;
+  tableSize:number = 5;
   tableSizes:any = [5,10,15,20]
 
   filter: 'all'| 'active'| 'done' = 'all';
@@ -48,6 +48,7 @@ apiUrl ='https://jsonplaceholder.typicode.com/todos';
   
 
 addItem(description: string, id: number){
+  
   this.allItems.unshift({
     id,
     description,
@@ -70,9 +71,20 @@ createItem(description:string){
 // }
 
   async getTodos() {
+    let pageSize = this.tableSize
+    let currentPage = this.page ==1 ? 0 : this.page 
+    let prvPage = this.page -1
+    let start = (pageSize*prvPage)+1
+    let params = `?_limit=${this.tableSize}&_start=${start}`
+    console.log("Pagesize: "+pageSize, "currentPage: "+currentPage,  "Page "+this.page, "start "+start)
+    
     try {
-      const response= await axios.get(this.apiUrl );
-      response.data.map((data:any)=>{
+      this.allItems =[]
+      const response= await axios.get(this.apiUrl + params);
+      response.data
+      
+      .map((data:any)=>{
+        console.log(data)
        this.addItem(data.title, data.id)
       });
     } catch (error) {
@@ -132,23 +144,21 @@ createItem(description:string){
   
   
 
-  constructor(private usersService:UsersService) { }
+  constructor() { }
 
-  postList(): void{
-    this.usersService.getTodos().subscribe((response)=>{
-      this.POSTS = response;
-    })
-  }
+
 
   onTableDataChange(event:any){
     this.page = event;
-    this.postList();
+    this.getTodos()
+    console.log(this.page)
+    
   }
 
   onTableSizeChange(event:any): void{
     this.tableSize = event.target.value;
-    this.page = 1
-    this.postList();
+    // this.page = 1
+    this.getTodos()
   }
 }
 

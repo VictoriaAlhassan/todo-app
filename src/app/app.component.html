@@ -3,9 +3,7 @@
   <h1>My To Do List</h1>
   <label for="addItemInput">What would you like to do today?</label>
    
-
-
-  <input
+ <input
 #newItem
 placeholder="add an item"
 (keyup.enter)="createItem(newItem.value); newItem.value = ''"
@@ -33,14 +31,30 @@ id="addItemInput" />
   </div>
   
 
-     <h2>{{items.length}}  <span *ngIf="items.length === 1; elseelseBloack">item</span>
-    <ng-template #elseBlock>items</ng-template></h2>
+     <h6>Showing {{tableSize}} of {{count}} records   <span *ngIf="items.length === 1; elseelseBloack">item</span>
+    <ng-template #elseBlock>items</ng-template></h6>
   <ul>
-    <li *ngFor="let i of items">
-      <app-item (remove)="remove(i)" [item]="i"></app-item>
+    <li *ngFor="let item of items | paginate:{itemsPerPage: tableSize,
+    currentPage: page, totalItems: count}">
+      <app-item (remove)="remove(item)" [item]="item" (putTodosEvent)="putTodos($event)"></app-item>
     </li>
   </ul>
-</div>
+   <div>
+     <pagination-controls previousLabel="prev"
+     nextLabel="Next"
+     (pageChange)="onTableDataChange($event)">
+    </pagination-controls>
+   </div>
+
+   <div>
+    <select (change)="onTableSizeChange($event)">
+     <option *ngFor="let size of tableSizes">
+            {{size}}
+     </option>  
+    </select>
+ </div>
+ 
+   </div>
 
 
   <!-- <nav aria-label="Page navigation example"> -->
@@ -50,26 +64,26 @@ id="addItemInput" />
   <!-- </ul> -->
 <!-- </nav> -->
 
- <div class="container">
-  <table class="table">
-    <tbody>
-      <tr *ngFor="let post of POSTS | paginate:{itemsPerPage: tableSize,
-        currentPage: page,
-        totalItems: count}; let i = index">
-        <td>{{post.title}}</td>
-      </tr>
+ <!-- <div class="container"> -->
+  <!-- <table class="table"> -->
+    <!-- <tbody> -->
+      <!-- <tr *ngFor="let post of POSTS | paginate:{itemsPerPage: tableSize, -->
+        <!-- currentPage: page, -->
+        <!-- totalItems: count}; let i = index"> -->
+        <!-- <td>{{post.title}}</td> -->
+      <!-- </tr> -->
 
-    </tbody>
-  </table>
-     <div>
-      <pagination-controls previousLabel="prev"
-      nextLabel="Next"
-      (pageChange)="onTableDataChange($event)">
+    <!-- </tbody> -->
+  <!-- </table> -->
+     <!-- <div> -->
+      <!-- <pagination-controls previousLabel="prev" -->
+      <!-- nextLabel="Next" -->
+      <!-- (pageChange)="onTableDataChange($event)"> -->
 
-      </pagination-controls>
-     </div>
+      <!-- </pagination-controls> -->
+     <!-- </div> -->
 
- </div>
+ <!-- </div> -->
 
 <!-- <ul class="list-group"> -->
   <!-- <li class="list-group-item" *ngFor="let item of allItems| paginate: { itemsPerPage: 20, currentPage: page }"> -->
