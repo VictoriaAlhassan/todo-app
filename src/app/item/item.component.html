@@ -15,11 +15,11 @@
     <div *ngIf="editable">
         <input class="sm-text-input" placeholder="edit item" 
         [value]="item.description" #editedItem
-        (keyup.enter)="saveItem(editedItem.value)"/>
+        (keyup.enter)="handleSaveItem(editedItem.value, item.id)"/>
 
         <div class="btn-wrapper">
             <button class="btn" (click)="editable = !editable">Cancel</button>
-            <button class="btn btn-save" (click)="saveItem(editedItem.value)">Save</button>
+            <button class="btn btn-save" (click)="handleSaveItem(editedItem.value,item.id)">Save</button>
 
         </div>
         

@@ -1,6 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import axios, {Axios} from 'axios';
 import {Item} from './item';
+// import {ActivatedRoute, Router} from '@angular/router';
+import { UsersService } from './users.service';
+
 
 
 @Component({
@@ -10,9 +13,33 @@ import {Item} from './item';
 
 })
 export class AppComponent{
+// config: any;
+  // collection: [] = [];
+// constructor(
+  // private route: ActivatedRoute,
+  // private router : Router
+// ){
+  // this.config ={
+    // currentPage :1,
+    // itemsPerPage: 10,
+    // totalItems: 0, 
+  // }
+  // route.queryParams.subscribe(
+    // params=>this.config.currentPage = params['page'] ? params['page']:1)
+// 
+    // for(let i=1; i<=100;i++){
+      // this.collection.push(`item ${i}`)
+    // }
+// }
+    // pageChange(newPage: number){
+      // this.router.navigate([''], {queryParams: {page:newPage}})
+    // }
   title = 'todo';
-  // pages:number =1
-  // dataset:any[]=['1','2','3','4','5','6','7','8','9','10','11','12']
+  POSTS: any;
+  page:number = 1;
+  count:number = 0;
+  tableSize:number = 10;
+  tableSizes:any = [5,10,15,20]
 
   filter: 'all'| 'active'| 'done' = 'all';
 allItems = [] as any as Todo[];
@@ -20,12 +47,18 @@ apiUrl ='https://jsonplaceholder.typicode.com/todos';
   editedItem: any;
   
 
-addItem(description: string){
+addItem(description: string, id: number){
   this.allItems.unshift({
+    id,
     description,
     done:false
   })
 }
+createItem(description:string){
+  this.postTodos(description)
+}
+
+
 
 // editable = false;
 // @Input() item!: Item;
@@ -38,9 +71,9 @@ addItem(description: string){
 
   async getTodos() {
     try {
-      const response= await axios.get(this.apiUrl);
+      const response= await axios.get(this.apiUrl );
       response.data.map((data:any)=>{
-       this.addItem(data.title)
+       this.addItem(data.title, data.id)
       });
     } catch (error) {
       console.error(error);
@@ -48,38 +81,38 @@ addItem(description: string){
   }
   
   
-  async postTodos(){
+  async postTodos(title = 'eat'){
     try{
       const  response =  await axios.post( this.apiUrl,{
-        id: 1,
-        title: 'eat',
+        title,
         completed: 'false',
         
-              })
-         response.data.map((data:any)=>{
-            this.addItem(data.title)
-          });
+      })
+            this.addItem(response.data.title, response.data.id)
+        
     } catch (error) {
       console.error(error);
       }
   }
-  async putTodos(){
+  async putTodos(input: {description:string, id:number}){
     try{
-       await axios.put( this.apiUrl, {
-        title: this.title,
+       await axios.put( `${this.apiUrl}/${input.id}` ,{
+        title: input.description,
         done:false,
-        id:'1'
+        
       });
      } catch(error){
       console.log(error);
     }
   }
-  async deleteTodos(id:string){
-    axios.delete(this.apiUrl)
+  async deleteTodos(id:number){
+    axios.delete(`${this.apiUrl}/${id}`)
   
    }
+
    remove(item:Item){
     this.allItems.splice(this.allItems.indexOf(item), 1);
+    this.deleteTodos(item.id)
   }
   get items() {
     if(this.filter === 'all'){
@@ -90,18 +123,36 @@ addItem(description: string){
   
   ngOnInit(): void {
     this.getTodos()
-    this.postTodos()
-    this.putTodos()
+    // this.postTodos()
+    // this.putTodos()
+    // this.getTodos()
     
   }
  
   
   
 
-  constructor() { }
+  constructor(private usersService:UsersService) { }
+
+  postList(): void{
+    this.usersService.getTodos().subscribe((response)=>{
+      this.POSTS = response;
+    })
+  }
+
+  onTableDataChange(event:any){
+    this.page = event;
+    this.postList();
+  }
+
+  onTableSizeChange(event:any): void{
+    this.tableSize = event.target.value;
+    this.page = 1
+    this.postList();
+  }
 }
 
-type Todo = {description:string, done:boolean}
+type Todo = { id:number,description:string, done:boolean}
 
     
   

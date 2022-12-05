@@ -8,18 +8,18 @@
   <input
 #newItem
 placeholder="add an item"
-(keyup.enter)="addItem(newItem.value); newItem.value = ''"
+(keyup.enter)="createItem(newItem.value); newItem.value = ''"
 class="lg-text-input"
 id="addItemInput" />
 
-<button class="btn-primary" (click)="addItem(newItem.value)">Add</button>
+<button class="btn-primary" (click)="createItem(newItem.value)">Add</button>
  <!-- <button class="btn-todos" (click)="getTodos()" >Fetch todos</button> -->
- <!-- <nav aria-label="Page navigation example"> -->
-  <!-- <ul class="pagination"> -->
-    <!-- <li  *ngFor="let item of dataset"><button style="width:100x;height:40px;" class="btn-primary" (click)="getUserData(item,10)">{{item}}</button></li> -->
-    <!-- <li class="page-item" *ngFor="let item of dataset"><a (click)="getTodos(item,16)" class="page-link">{{item}}</a></li> -->
-  <!-- </ul> -->
-<!-- </nav> -->
+
+
+
+
+
+
   
   <div class="btn-wrapper">
     <button class="btn btn-menu" [class.active]="filter== 'all'"
@@ -41,6 +41,35 @@ id="addItemInput" />
     </li>
   </ul>
 </div>
+
+
+  <!-- <nav aria-label="Page navigation example"> -->
+  <!-- <ul class="pagination"> -->
+    <!-- <li  *ngFor="let item of dataset"><button style="width:100x;height:40px;" class="btn-primary" (click)="getUserData(item,10)">{{item}}</button></l i> -->
+    <!-- <li class="page-item" *ngFor="let item of dataset"><a (click)="getTodos(item,16)" class="page-link">{{item}}</a></li> -->
+  <!-- </ul> -->
+<!-- </nav> -->
+
+ <div class="container">
+  <table class="table">
+    <tbody>
+      <tr *ngFor="let post of POSTS | paginate:{itemsPerPage: tableSize,
+        currentPage: page,
+        totalItems: count}; let i = index">
+        <td>{{post.title}}</td>
+      </tr>
+
+    </tbody>
+  </table>
+     <div>
+      <pagination-controls previousLabel="prev"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange($event)">
+
+      </pagination-controls>
+     </div>
+
+ </div>
 
 <!-- <ul class="list-group"> -->
   <!-- <li class="list-group-item" *ngFor="let item of allItems| paginate: { itemsPerPage: 20, currentPage: page }"> -->

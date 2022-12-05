@@ -13,7 +13,11 @@ export class ItemComponent {
 
   @Input() item!: Item;
   @Input() newItem!: string;
+  @Output() putTodosEvent = new EventEmitter<{description:string, id:number}>();
   @Output() remove = new EventEmitter<Item>();
+  @Output() putTodos = new EventEmitter<{description:string, id:number}>();
+
+  
 
 
   saveItem(description: string){
@@ -21,6 +25,18 @@ export class ItemComponent {
     this.editable = false;
     this.item.description = description;
   }
+  handleSaveItem(description:string, id:number){
+    this.saveItem(description)
+    this.putTodosEvent.emit({description,id})
+    
+    
+
+  }
+  // handleEditItem(description:string, id:number){
+    // this.editable = true;
+    // this.putTodos.emit({ description, id })
+  // }
+  // 
 
 
 }
