@@ -122,6 +122,19 @@ createItem(description:string){
   
    }
 
+   async check(item: Item){
+    item.done = !item.done
+    try {
+      await axios.patch(`${this.apiUrl}/${item.id}`, {completed: item.done})
+        .then(()=>{
+        
+        })
+    } catch (error) {
+      
+    }
+    
+   }
+
    remove(item:Item){
     this.allItems.splice(this.allItems.indexOf(item), 1);
     this.deleteTodos(item.id)

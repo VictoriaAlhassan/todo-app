@@ -31,12 +31,12 @@ id="addItemInput" />
   </div>
   
 
-     <h6>Showing {{tableSize}} of {{count}} records   <span *ngIf="items.length === 1; elseelseBloack">item</span>
+     <h6>{{items.length}}  <span *ngIf="items.length === 1; elseelseBloack">item</span>
     <ng-template #elseBlock>items</ng-template></h6>
   <ul>
     <li *ngFor="let item of items | paginate:{itemsPerPage: tableSize,
     currentPage: page, totalItems: count}">
-      <app-item (remove)="remove(item)" [item]="item" (putTodosEvent)="putTodos($event)"></app-item>
+      <app-item (updateStatus)="check(item)"  (remove)="remove(item)" [item]="item" (putTodosEvent)="putTodos($event)"></app-item>
     </li>
   </ul>
    <div>

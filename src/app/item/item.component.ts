@@ -1,5 +1,8 @@
-import { Component, Input, Output,EventEmitter } from '@angular/core';
+import { Component, Input, Output,EventEmitter, OnInit } from '@angular/core';
 import {Item} from '../item';
+import {NgbModal, ModalDismissReasons} from  '@ng-bootstrap/ng-bootstrap'
+
+
 
 
 @Component({
@@ -7,18 +10,53 @@ import {Item} from '../item';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css']
 })
-export class ItemComponent {
+export class ItemComponent  {
+ 
 
-  editable = false;
+ editable = false;
+ closeResult: any;
 
   @Input() item!: Item;
   @Input() newItem!: string;
   @Output() putTodosEvent = new EventEmitter<{description:string, id:number}>();
   @Output() remove = new EventEmitter<Item>();
-  @Output() putTodos = new EventEmitter<{description:string, id:number}>();
+  @Output() updateStatus = new EventEmitter<Item>();
+
+  constructor(private modalService: NgbModal) {} 
+
+  open(content:any){
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) =>{
+     this.closeResult = `Closed with: ${result}`; 
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`
+    });
+  }
+
+  private getDismissReason(reason:any):string {
+    if(reason === ModalDismissReasons.ESC){
+      return 'by pressing ESC'
+    }  else if(reason === ModalDismissReasons.BACKDROP_CLICK){
+      return 'by clicking on a backdrop';
+    }  else{
+      return `with: ${reason}`;
+    }
+  }
 
   
+  
 
+  done(item: Item){
+    item.done = !item.done
+    console.log(item)
+
+    // item.done = false;
+  }
+
+
+  updatePost(item: Item){
+    this.updateStatus.emit(item);
+
+  }
 
   saveItem(description: string){
     if(!description) return;
@@ -28,8 +66,7 @@ export class ItemComponent {
   handleSaveItem(description:string, id:number){
     this.saveItem(description)
     this.putTodosEvent.emit({description,id})
-    
-    
+
 
   }
   // handleEditItem(description:string, id:number){
