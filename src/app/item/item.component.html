@@ -3,10 +3,10 @@
     (change)="updatePost(item)"  [checked]="item.done"/>
 
     <label [for]="item.description">{{item.description}}</label>
-   
+      <div>
     <div class="btn-wrapper" *ngIf="!editable"> 
     <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Edit</button>
-   
+      
     <ng-template #mymodal let-modal>
       <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">Edit Todo</h4>
@@ -24,7 +24,27 @@
       </div>
     </ng-template>
 
+    <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Delete</button> -->
+    <!-- <ng-template #content let-modal> -->
+      <!-- <div class="modal-header"> -->
+        <!-- <h4 class="modal-title" id="modal-basic-title">Delete Todo</h4> -->
+        <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+      <!-- </div> -->
+      <!-- <div class="modal-body"> -->
+        <!-- <input class="sm-text-input" placeholder="edit item"  -->
+        <!-- [value]="item.description" #editedItem /> -->
+<!--            -->
+<!--            -->
+      <!-- </div> -->
+      <!-- <div class="modal-footer"> -->
+        <!-- <button type="button" class="btn btn-outline-dark" (click)="remove.emit()">Confirm Delete</button> -->
+      <!-- </div> -->
+    <!-- </ng-template> -->
+    <!--  -->
+    
+
     <button class="btn btn-warn" (click)="remove.emit()">Delete</button>
+    
   </div> 
 
 
