@@ -8,27 +8,29 @@ import {FormsModule} from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import {RouterModule, Routes} from '@angular/router';
-import { AppComponent } from './app.component';
+import {AppComponent} from './app.component'
 import { ItemComponent } from './item/item.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DetailsComponent } from './details/details.component';
+import { TaskComponent } from './task/task.component';
 
 
- const routes: Routes = [
-  {path: 'home', component: AppComponent},
-  {path:'details', component: DetailsComponent}
+//  const routes: Routes = [
+  // {path: 'home', component: AppComponent},
+  // {path:'details', component: DetailsComponent}
   // {path: '', redirectTo: 'home', pathMatch: 'full'},
- ]
+//  ]
 
 @NgModule({
   declarations: [
     AppComponent,
+    TaskComponent,
     ItemComponent,
     DetailsComponent
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes),
+    RouterModule,
     AppRoutingModule,
     HttpClientModule,
     NgxPaginationModule,

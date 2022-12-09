@@ -1,8 +1,8 @@
 <div class="item">
     <input [id]="item.description"  type="checkbox"
-    (change)="updatePost(item)"  [checked]="item.done"/>
+    (change)="updatePost(item)"  [checked]="item.completed"/>
 
-    <label [for]="item.description">{{item.description}}</label>
+    <label [for]="item.description" (click)="ItemClick(item)">{{item.description}}</label>
       <div>
     <div class="btn-wrapper" *ngIf="!editable"> 
     <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Edit</button>
@@ -44,7 +44,7 @@
     
 
     <button class="btn btn-warn" (click)="remove.emit()">Delete</button>
-    
+
   </div> 
 
 
