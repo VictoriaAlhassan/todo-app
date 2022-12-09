@@ -33,9 +33,10 @@ export class TaskComponent {
     this.postTodos(description);
   }
   async getTodos() {
+    this.allItems = [];
     let prvPage = this.page - 1;
-    let start = this.tableSize * prvPage + 1;
-
+    let start = this.tableSize * prvPage;
+    start = start + 1;
     this.usersService.getTodos(this.tableSize, start).then((res) => {
       res.data.map((data: any) => {
         console.log(data);
