@@ -1,55 +1,81 @@
 <div class="main">
-    <!-- <app-item></app-item> -->
-    <h1>My To Do List</h1>
-    <label for="addItemInput">What would you like to do today?</label>
-     
-   <input
-  #newItem
-  placeholder="add an item"
-  (keyup.enter)="createItem(newItem.value); newItem.value = ''"
-  class="lg-text-input"
-  id="addItemInput" />
-  
+  <!-- <app-item></app-item> -->
+  <h1>My To Do List</h1>
+  <label for="addItemInput">What would you like to do today?</label>
+
+  <input
+    #newItem
+    placeholder="add an item"
+    (keyup.enter)="createItem(newItem.value); newItem.value = ''"
+    class="lg-text-input"
+    id="addItemInput"
+  />
+
   <button class="btn-primary" (click)="createItem(newItem.value)">Add</button>
-   <!-- <button class="btn-todos" (click)="getTodos()" >Fetch todos</button> -->
-   
-  
-   <div class="btn-wrapper">
-      <button class="btn btn-menu" [class.active]="filter== 'all'"
-      (click)="filter = 'all'">All</button>
-  
-      <button class="btn btn-menu" [class.active]="filter=='active'"
-      (click)="filter = 'active'">To Do</button>
-  
-      <button class="btn btn-menu" [class.active]="filter=='completed'" 
-      (click)="filter = 'completed'">Done</button>
-  
-    
-    </div>
-    
-  
-       <h6>{{items.length}}  <span *ngIf="items.length === 1; elseelseBloack">item</span>
-      <ng-template #elseBlock>items</ng-template></h6>
-    <ul>
-      <li *ngFor="let item of items | paginate:{itemsPerPage: tableSize,
-      currentPage: page, totalItems: count}">
-        <app-item  (itemClick)="ItemClick(item)" (updateStatus)="check(item)"  (remove)="remove(item)" [item]="item" (putTodosEvent)="putTodos($event)"></app-item>
-      </li>
-    </ul>
-     <div>
-       <pagination-controls previousLabel="prev"
-       nextLabel="Next"
-       (pageChange)="onTableDataChange($event)">
-      </pagination-controls>
-     </div>
-  
-     <div>
-      <select (change)="onTableSizeChange($event)">
-       <option *ngFor="let size of tableSizes">
-              {{size}}
-       </option>  
-      </select>
-   </div>
-   
-     </div>
-  
+  <!-- <button class="btn-todos" (click)="getTodos()" >Fetch todos</button> -->
+
+  <div class="btn-wrapper">
+    <button
+      class="btn btn-menu"
+      [class.active]="filter == 'all'"
+      (click)="filter = 'all'"
+    >
+      All
+    </button>
+
+    <button
+      class="btn btn-menu"
+      [class.active]="filter == 'active'"
+      (click)="filter = 'active'"
+    >
+      To Do
+    </button>
+
+    <button
+      class="btn btn-menu"
+      [class.active]="filter == 'completed'"
+      (click)="filter = 'completed'"
+    >
+      Done
+    </button>
+  </div>
+
+  <h6>
+    {{ items.length }}
+    <span *ngIf="items.length === 1; elseelseBloack">item</span>
+    <ng-template #elseBlock>items</ng-template>
+  </h6>
+  <ul>
+    <li
+      *ngFor="
+        let item of items
+          | paginate
+            : { itemsPerPage: tableSize, currentPage: page, totalItems: count }
+      "
+    >
+      <app-item
+        (updateStatus)="check(item)"
+        (itemClick)="ItemClick(item)"
+        (remove)="remove(item)"
+        [item]="item"
+        (putTodosEvent)="putTodos($event)"
+      ></app-item>
+    </li>
+  </ul>
+  <div>
+    <pagination-controls
+      previousLabel="prev"
+      nextLabel="Next"
+      (pageChange)="onTableDataChange($event)"
+    >
+    </pagination-controls>
+  </div>
+
+  <div>
+    <select (change)="onTableSizeChange($event)">
+      <option *ngFor="let size of tableSizes">
+        {{ size }}
+      </option>
+    </select>
+  </div>
+</div>

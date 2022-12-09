@@ -48,7 +48,7 @@ export class ItemComponent {
 
   done(item: Item) {
     item.completed = !item.completed;
-    console.log(item);
+    // console.log(item);
 
     // item.done = false;
   }

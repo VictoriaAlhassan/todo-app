@@ -13,6 +13,7 @@ import { ItemComponent } from './item/item.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { DetailsComponent } from './details/details.component';
 import { TaskComponent } from './task/task.component';
+import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 
 
 //  const routes: Routes = [
@@ -26,7 +27,8 @@ import { TaskComponent } from './task/task.component';
     AppComponent,
     TaskComponent,
     ItemComponent,
-    DetailsComponent
+    DetailsComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,

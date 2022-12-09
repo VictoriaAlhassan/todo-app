@@ -30,11 +30,12 @@ export class TaskComponent {
     });
   }
   createItem(description: string) {
-    this.usersService.postTodos(description);
+    this.postTodos(description);
   }
   async getTodos() {
     let prvPage = this.page - 1;
     let start = this.tableSize * prvPage + 1;
+
     this.usersService.getTodos(this.tableSize, start).then((res) => {
       res.data.map((data: any) => {
         console.log(data);
@@ -57,19 +58,19 @@ export class TaskComponent {
     // }
   }
 
-  // async postTodos(title = 'eat'){
-  // try{
-  // const  response =  await axios.post( this.apiUrl,{
-  // title,
-  // completed: 'false',
-  //
-  // })
-  // this.addItem(response.data.title, response.data.id)
-  //
-  // } catch (error) {
-  // console.error(error);
-  // }
-  // }
+  async postTodos(title = 'eat') {
+    try {
+      const response = await axios.post(this.apiUrl, {
+        title,
+        completed: 'false',
+        //
+      });
+      this.addItem(response.data.title, response.data.id);
+      //
+    } catch (error) {
+      console.error(error);
+    }
+  }
   async putTodos(input: { description: string; id: number }) {
     try {
       await axios.put(`${this.apiUrl}/${input.id}`, {
@@ -126,7 +127,7 @@ export class TaskComponent {
   }
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
-    this.page = 1;
+    // this.page = 1;
     this.getTodos();
   }
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import axios, { Axios } from 'axios';
 import { Item } from './item';
+import { TaskComponent } from './task/task.component';
 
 @Injectable({
   providedIn: 'root',

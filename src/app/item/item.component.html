@@ -1,72 +1,94 @@
 <div class="item">
-    <input [id]="item.description"  type="checkbox"
-    (change)="updatePost(item)"  [checked]="item.completed"/>
+  <input
+    [id]="item.description"
+    type="checkbox"
+    (change)="updatePost(item)"
+    [checked]="item.completed"
+  />
 
-    <label [for]="item.description" (click)="ItemClick(item)">{{item.description}}</label>
-      <div>
-    <div class="btn-wrapper" *ngIf="!editable"> 
-    <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Edit</button>
-      
-    <ng-template #mymodal let-modal>
-      <div class="modal-header">
-        <h4 class="modal-title" id="modal-basic-title">Edit Todo</h4>
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-          <span aria-hidden="true">×</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <input class="sm-text-input" placeholder="edit item" 
-           [value]="item.description" #editedItem
-            (keyup.enter)="handleSaveItem(editedItem.value, item.id)"/>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="handleSaveItem(editedItem.value,item.id)">Ok</button>
-      </div>
-    </ng-template>
+  <label [for]="item.description" (click)="ItemClick(item)">{{
+    item.description
+  }}</label>
+  <div>
+    <div class="btn-wrapper" *ngIf="!editable">
+      <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">
+        Edit
+      </button>
 
-    <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Delete</button> -->
-    <!-- <ng-template #content let-modal> -->
+      <ng-template #mymodal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Edit Todo</h4>
+          <button
+            type="button"
+            class="close"
+            aria-label="Close"
+            (click)="modal.dismiss('Cross click')"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <input
+            class="sm-text-input"
+            placeholder="edit item"
+            [value]="item.description"
+            #editedItem
+            (keyup.enter)="handleSaveItem(editedItem.value, item.id)"
+          />
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline-dark"
+            (click)="handleSaveItem(editedItem.value, item.id)"
+          >
+            Ok
+          </button>
+        </div>
+      </ng-template>
+
+      <!-- <button class="btn btn-lg btn-outline-primary" (click)="open(mymodal)">Delete</button> -->
+      <!-- <ng-template #content let-modal> -->
       <!-- <div class="modal-header"> -->
-        <!-- <h4 class="modal-title" id="modal-basic-title">Delete Todo</h4> -->
-        <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
+      <!-- <h4 class="modal-title" id="modal-basic-title">Delete Todo</h4> -->
+      <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
       <!-- </div> -->
       <!-- <div class="modal-body"> -->
-        <!-- <input class="sm-text-input" placeholder="edit item"  -->
-        <!-- [value]="item.description" #editedItem /> -->
-<!--            -->
-<!--            -->
+      <!-- <input class="sm-text-input" placeholder="edit item"  -->
+      <!-- [value]="item.description" #editedItem /> -->
+      <!--            -->
+      <!--            -->
       <!-- </div> -->
       <!-- <div class="modal-footer"> -->
-        <!-- <button type="button" class="btn btn-outline-dark" (click)="remove.emit()">Confirm Delete</button> -->
+      <!-- <button type="button" class="btn btn-outline-dark" (click)="remove.emit()">Confirm Delete</button> -->
       <!-- </div> -->
-    <!-- </ng-template> -->
-    <!--  -->
-    
+      <!-- </ng-template> -->
+      <!--  -->
 
-    <button class="btn btn-warn" (click)="remove.emit()">Delete</button>
+      <button class="btn btn-warn" (click)="remove.emit()">Delete</button>
+    </div>
 
-  </div> 
+    <!-- <div class="btn-wrapper" *ngIf="!editable">  -->
+    <!-- <button class="btn" (click)="editable = !editable">Edit</button> -->
 
+    <!-- <button class="btn btn-warn" (click)="remove.emit()">Delete</button> -->
 
-     <!-- <div class="btn-wrapper" *ngIf="!editable">  -->
-        <!-- <button class="btn" (click)="editable = !editable">Edit</button> -->
-
-        <!-- <button class="btn btn-warn" (click)="remove.emit()">Delete</button> -->
-
-    <!-- </div> --> 
+    <!-- </div> -->
 
     <!-- <div *ngIf="editable"> -->
 
-       <!-- <input class="sm-text-input" placeholder="edit item"  -->
-        <!-- [value]="item.description" #editedItem -->
-        <!-- (keyup.enter)="handleSaveItem(editedItem.value, item.id)"/> -->
+    <!-- <input class="sm-text-input" placeholder="edit item"  -->
+    <!-- [value]="item.description" #editedItem -->
+    <!-- (keyup.enter)="handleSaveItem(editedItem.value, item.id)"/> -->
 
-        <!-- <div class="btn-wrapper"> -->
-            <!-- <button class="btn" (click)="editable = !editable">Cancel</button> -->
-            <!-- <button class="btn btn-save" (click)="handleSaveItem(editedItem.value,item.id)">Save</button> -->
+    <!-- <div class="btn-wrapper"> -->
+    <!-- <button class="btn" (click)="editable = !editable">Cancel</button> -->
+    <!-- <button class="btn btn-save" (click)="handleSaveItem(editedItem.value,item.id)">Save</button> -->
 
-        <!-- </div> -->
-        
+    <!-- </div> -->
+
     <!-- </div> -->
     <!--  -->
-<!-- </div> -->
+    <!-- </div> -->
+  </div>
+</div>
